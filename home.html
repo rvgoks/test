@@ -7,7 +7,7 @@
 <meta name="salesforce-client-id" content="3MVG9oNqAtcJCF.EjFXpdJ2J2wTdlRs0ofLuu_zuYYxQ0DyDDnFZPQ917X6Zvo2VQffsoej0pR9889V56hRWj">
 <meta name="salesforce-redirect-uri" content="https://rvgoks.github.io/test/home.html">
 <meta name="salesforce-mode content="modal">
-<meta name="salesforce-target content="#sing-in-link">
+<meta name="salesforce-target content="#sign-in-link">
 <meta name="salesforce-save-access-token content="true">
 <meta name="salesforce-login-handler content="onLogin">
 <meta name="salesforce-logout-handler content="onLogout">
@@ -26,6 +26,39 @@
 </body>
 
 <script>
+function onLogin(identity) {
+		
+		var targetDiv = document.querySelector(SFIDWidget.config.target);	
+		
+		var avatar = document.createElement('a'); 
+	 	avatar.href = "javascript:showIdentityOverlay();";
+		
+		
+		var img = document.createElement('img'); 
+	 	img.src = identity.photos.thumbnail; 
+		img.className = "sfid-avatar";
+	
+		var username = document.createElement('span'); 
+		username.innerHTML = identity.username;
+		username.className = "sfid-avatar-name";
+	
+		var iddiv = document.createElement('div'); 
+	 	iddiv.id = "sfid-identity";
+		
+		avatar.appendChild(img);
+		avatar.appendChild(username);
+		iddiv.appendChild(avatar);		
+	
+		targetDiv.innerHTML = '';
+		targetDiv.appendChild(iddiv);	
+		
+		
+	}
+	</script>
+	<script>
+function onLogout() {
+		SFIDWidget.init();
 
+        }
 </script>
 </html>
